@@ -13,11 +13,6 @@ body {
     background: hotpink;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-}
-
 #custom-grid-div {
     display: flex;
     align-items: center;
