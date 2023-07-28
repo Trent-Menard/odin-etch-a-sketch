@@ -1,6 +1,7 @@
 generateCustomGridButton();
 generateDivGrid();
 
+// Creates default 4x4 (16) grid; pass int to override size
 function generateDivGrid(dflt= 16) {
     let divElement = document.createElement("div");
     divElement.setAttribute("id", "gridDiv");
@@ -17,6 +18,7 @@ function generateDivGrid(dflt= 16) {
     }
 }
 
+// Creates "Create Custom Grid" button & handler
 function generateCustomGridButton() {
     let divElement = document.createElement("div");
     divElement.setAttribute("id", "custom-grid-div");
@@ -30,19 +32,13 @@ function generateCustomGridButton() {
     customGridDivElement.addEventListener("click", () => handleUserInput());
 }
 
+// Parse user input and replace current grid size with input
 function handleUserInput(){
-    let response;
-    response = prompt("Enter custom grid size (max: 100):");
+    let response = Number.parseInt(prompt("Enter custom grid size (max: 100):"));
 
-/*    try {
-        response = Number.parseInt(response);
-        console.log(!isNaN(response));
-    }catch (e) {
-        console.error(e);
-    }
+    while (Number.isNaN(response) || (response <= 0) || (response > 100))
+        response = Number.parseInt(prompt("Invalid input.\nEnter custom grid size (max: 100):"));
 
-    while (!response)
-        response = prompt("Invalid input.\nEnter custom grid size (max: 100):");*/
-
-    // clear screen then call generateDivGrid(response);
+    document.querySelectorAll(".grid").forEach((x) => x.remove());
+    generateDivGrid(response);
 }
