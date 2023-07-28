@@ -1,0 +1,34 @@
+
+body {
+    margin: 0;
+    border: 5px solid #590D22;
+}
+
+#gridDiv {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid:hover {
+    background: hotpink;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+#custom-grid-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#custom-grid-button {
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 15px;
+    color: #C9184A;
+    font-family: Consolas, serif;
+    font-weight: bold;
+}
