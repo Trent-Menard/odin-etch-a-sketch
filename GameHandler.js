@@ -5,9 +5,12 @@ generateDivGrid();
 function generateDivGrid(dflt= 16) {
     let divElement = document.createElement("div");
     divElement.setAttribute("id", "gridDiv");
+    divElement.style.display = "grid";
+    divElement.style.gridTemplateColumns = "repeat(" + dflt + ", 1fr)";
+    divElement.style.gridTemplateRows = "repeat(" + dflt + ", 1fr)";
     document.getElementsByTagName("main")[0].appendChild(divElement);
 
-    for (let i = 1; i <= dflt; i++) {
+    for (let i = 1; i <= dflt * dflt; i++) {
         let divElement = document.createElement("div");
         let divElementVal = document.createElement("p");
         divElementVal.innerText = String(i);
@@ -40,5 +43,6 @@ function handleUserInput(){
         response = Number.parseInt(prompt("Invalid input.\nEnter custom grid size (max: 100):"));
 
     document.querySelectorAll(".grid").forEach((x) => x.remove());
+    document.getElementById("gridDiv").remove();
     generateDivGrid(response);
 }

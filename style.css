@@ -4,11 +4,6 @@ body {
     border: 5px solid #590D22;
 }
 
-#gridDiv {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-}
-
 .grid:hover {
     background: hotpink;
 }
