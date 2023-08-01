@@ -1,21 +1,17 @@
 
 body {
     margin: 0;
-    border: 5px solid #590D22;
 }
 
-.grid:hover {
-    background: hotpink;
-}
-
-#custom-grid-div {
+#buttons-div {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
 }
 
-#custom-grid-button {
-    padding: 15px;
+#custom-grid-button, #clear-grid-button {
+    padding: 15px;;
     font-size: 20px;
     border-radius: 15px;
     color: #C9184A;
