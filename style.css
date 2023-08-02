@@ -1,16 +1,13 @@
 
-body {
-    margin: 0;
-}
-
-#buttons-div {
+body, #buttons-div {
+    margin: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
 }
 
-#custom-grid-button, #clear-grid-button {
+#custom-grid-button, #clear-grid-button, #rainbow-mode-button {
     padding: 15px;;
     font-size: 20px;
     border-radius: 15px;

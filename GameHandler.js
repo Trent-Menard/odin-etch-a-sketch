@@ -3,39 +3,44 @@ generateCustomGridButton();
 generateClearGridButton();
 generateDivGrid();
 
+let rainbowMode = false;
+
 // Creates default 4x4 (16) grid; pass int to override size
 function generateDivGrid(dflt= 16) {
     let divElement = document.createElement("div");
     divElement.id = "gridDiv";
     divElement.style.display = "grid";
-    divElement.style.gridTemplateColumns = "repeat(" + dflt + ", auto)";
-    divElement.style.gridTemplateRows = "repeat(" + dflt + ", auto)";
+    divElement.style.gridTemplateColumns = "repeat(" + dflt + ", 1fr)";
+    divElement.style.gridTemplateRows = "repeat(" + dflt + ", 1fr)";
+    divElement.style.width = "90vh";
+    divElement.style.height = "90vh";
     divElement.style.border = "5px solid #590D22";
-
+    divElement.style.color = ""
     document.getElementsByTagName("main")[0].appendChild(divElement);
 
     for (let i = 1; i <= dflt * dflt; i++) {
         let divElement = document.createElement("div");
-        let divElementVal = document.createElement("p");
-        divElementVal.innerText = "";
         divElement.id = "grid-" + i;
+        divElement.style.margin = "0";
         divElement.setAttribute("class", "grid");
-        divElementVal.style.width = "1em";
-        divElementVal.style.height = "1em";
+
         document.getElementById("gridDiv").appendChild(divElement);
+        divElement.addEventListener("mouseover", () => {
 
-        let targetDiv = document.getElementById("grid-" + i);
-        targetDiv.appendChild(divElementVal);
-        targetDiv.addEventListener("mouseover", () => {
+            if (rainbowMode) {
+                divElement.style.backgroundColor = getRainbowRandomColor();
+                divElement.style.opacity="";
+            }
 
-            if (targetDiv.style.backgroundColor === "")
-                targetDiv.style.backgroundColor="black";
+            else {
+                if (divElement.style.backgroundColor === "" || divElement.style.backgroundColor !== "black") {
+                    divElement.style.backgroundColor = "black";
+                    divElement.style.opacity = "0.1";
+                }
 
-            if (targetDiv.style.opacity === "")
-                targetDiv.style.opacity = "0.1";
-
-            else if (targetDiv.style.opacity < 1.0)
-                targetDiv.style.opacity = (parseFloat(targetDiv.style.opacity) + 0.1).toString();
+                else if (divElement.style.opacity < 1.0 && divElement.style.backgroundColor === "black") // Essentially divElement.style.opacity += 0.1;
+                    divElement.style.opacity = (parseFloat(divElement.style.opacity) + 0.1).toString();
+            }
         });
     }
 }
@@ -73,6 +78,27 @@ function generateClearGridButton() {
     });
 }
 
+let buttonElement = document.createElement("button");
+buttonElement.setAttribute("id", "rainbow-mode-button");
+buttonElement.textContent = "Enable Rainbow Mode";
+
+let buttonsDivElement = document.getElementById("buttons-div");
+buttonsDivElement.appendChild(buttonElement);
+
+let rainbowModeButton = document.getElementById("rainbow-mode-button");
+rainbowModeButton.addEventListener("click", () => {
+
+    if (!rainbowMode) {
+        rainbowModeButton.textContent = "Disable Rainbow Mode";
+        rainbowMode = true;
+    }
+
+    else {
+        rainbowModeButton.textContent = "Enable Rainbow Mode";
+        rainbowMode = false;
+    }
+});
+
 // Parse user input and replace current grid size with input
 function handleUserInput(){
     let response = Number.parseInt(prompt("Enter custom grid size (max: 100):"));
@@ -83,4 +109,9 @@ function handleUserInput(){
     document.querySelectorAll(".grid").forEach((x) => x.remove());
     document.getElementById("gridDiv").remove();
     generateDivGrid(response);
+}
+
+function getRainbowRandomColor() {
+    let choices = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
+    return choices[Math.floor(Math.random() * choices.length)];
 }
